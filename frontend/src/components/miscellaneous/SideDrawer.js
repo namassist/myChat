@@ -83,8 +83,8 @@ function SideDrawer() {
       setSearchResult(data);
     } catch (error) {
       toast({
-        title: "Error Occured!",
-        description: "Failed to Load the Search Results",
+        title: "Error!",
+        description: "Gagal mengambil hasil pencarian!",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -112,7 +112,7 @@ function SideDrawer() {
       onClose();
     } catch (error) {
       toast({
-        title: "Error fetching the chat",
+        title: "Gagal mengambil chat!",
         description: error.message,
         status: "error",
         duration: 5000,

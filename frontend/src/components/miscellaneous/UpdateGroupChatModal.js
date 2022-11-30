@@ -52,8 +52,8 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       setSearchResult(data);
     } catch (error) {
       toast({
-        title: "Error Occured!",
-        description: "Failed to Load the Search Results",
+        title: "Error!",
+        description: "Gagal mengambil hasil pencarian!",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -89,7 +89,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       setRenameLoading(false);
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Error!",
         description: error.response.data.message,
         status: "error",
         duration: 5000,
@@ -104,7 +104,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   const handleAddUser = async (user1) => {
     if (selectedChat.users.find((u) => u._id === user1._id)) {
       toast({
-        title: "User Already in group!",
+        title: "User sudah ada di grup!",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -115,7 +115,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
 
     if (selectedChat.groupAdmin._id !== user._id) {
       toast({
-        title: "Only admins can add someone!",
+        title: "Hanya admin yang bisa menambah anggota!",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -145,7 +145,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       setLoading(false);
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Error!",
         description: error.response.data.message,
         status: "error",
         duration: 5000,
@@ -160,7 +160,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   const handleRemove = async (user1) => {
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
       toast({
-        title: "Only admins can remove someone!",
+        title: "Hanya admin yang bisa menghapus!",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -191,7 +191,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       setLoading(false);
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Error!",
         description: error.response.data.message,
         status: "error",
         duration: 5000,

@@ -21,7 +21,7 @@ const Login = () => {
     setLoading(true);
     if (!email || !password) {
       toast({
-        title: "Please Fill all the Feilds",
+        title: "Kolom input harus diisi!",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -45,7 +45,7 @@ const Login = () => {
       );
 
       toast({
-        title: "Login Successful",
+        title: "Login Sukses",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -56,7 +56,7 @@ const Login = () => {
       history.push("/chats");
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Error!",
         description: error.response.data.message,
         status: "error",
         duration: 5000,
