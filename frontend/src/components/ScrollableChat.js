@@ -12,6 +12,15 @@ import { ChatState } from "../Context/ChatProvider";
 const ScrollableChat = ({ messages }) => {
   const { user } = ChatState();
 
+  const formatDate = (dateString) => {
+    const options = {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    };
+    return new Date(dateString).toLocaleTimeString(undefined, options);
+  };
+
   return (
     <ScrollableFeed>
       {messages &&
@@ -43,6 +52,15 @@ const ScrollableChat = ({ messages }) => {
               }}
             >
               {m.content}
+            </span>
+            <span
+              style={{
+                fontSize: "8px",
+                marginTop: "30px",
+                marginLeft: "5px",
+              }}
+            >
+              {formatDate(m.createdAt)}
             </span>
           </div>
         ))}

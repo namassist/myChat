@@ -10,6 +10,7 @@ import {
   useDisclosure,
   FormControl,
   Input,
+  Select,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -62,6 +63,8 @@ const GroupChatModal = ({ children }) => {
           "Content-type": "application/json",
         },
       };
+
+      // eslint-disable-next-line no-unused-vars
       const { data } = await axios.post(
         "/api/user",
         {
@@ -107,7 +110,7 @@ const GroupChatModal = ({ children }) => {
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="#7AA7DC">
           <ModalHeader
             fontSize="35px"
             fontFamily="Work sans"
@@ -121,8 +124,10 @@ const GroupChatModal = ({ children }) => {
             <FormControl>
               <Input
                 placeholder="No Jaringan"
-                onChange={(e) => setNoJaringan(e.target.value)}
+                _placeholder={{ color: "#7B7676" }}
+                bg="#D9D9D9"
                 mb={3}
+                onChange={(e) => setNoJaringan(e.target.value)}
               />
             </FormControl>
             <FormControl>
@@ -130,39 +135,65 @@ const GroupChatModal = ({ children }) => {
                 placeholder="Pelanggan"
                 onChange={(e) => setName(e.target.value)}
                 mb={3}
+                _placeholder={{ color: "#7B7676" }}
+                bg="#D9D9D9"
               />
             </FormControl>
             <FormControl>
-              <Input
-                placeholder="Status"
-                onChange={(e) => setStatus(e.target.value)}
+              <Select
                 mb={3}
-              />
+                value={status}
+                placeholder="Status"
+                bg="#D9D9D9"
+                textColor={status !== undefined ? "" : "#7B7676"}
+                iconColor="gray.400"
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="on progress">On Progress</option>
+                <option value="End">End</option>
+              </Select>
             </FormControl>
             <FormControl>
               <Input
                 placeholder="Order"
                 onChange={(e) => setOrder(e.target.value)}
                 mb={3}
+                _placeholder={{ color: "#7B7676" }}
+                bg="#D9D9D9"
               />
             </FormControl>
             <FormControl>
-              <Input
-                placeholder="Vendor"
-                onChange={(e) => setVendor(e.target.value)}
+              <Select
+                bg="#D9D9D9"
                 mb={3}
-              />
+                value={vendor}
+                placeholder="Vendor"
+                textColor={vendor !== undefined ? "" : "#7B7676"}
+                iconColor="gray.400"
+                onChange={(e) => setVendor(e.target.value)}
+              >
+                <option value="Catu Buana">Catu Buana</option>
+                <option value="PPS">PPS</option>
+                <option value="Kopkarla">Kopkarla</option>
+                <option value="Wahana Teknik">Wahana Teknik</option>
+                <option value="SMN Mandiri">SMN Mandiri</option>
+                <option value="Pratama Mandiri">Pratama Mandiri</option>
+                <option value="Amanah">Amanah</option>
+                <option value="Wesi Aji">Wesi Aji</option>
+              </Select>
             </FormControl>
             <FormControl>
               <Input
                 placeholder="Nama Vendor"
                 onChange={(e) => setNamaVendor(e.target.value)}
                 mb={3}
+                _placeholder={{ color: "#7B7676" }}
+                bg="#D9D9D9"
               />
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleSubmit} colorScheme="blue">
+            <Button onClick={handleSubmit} bg="#1666BA" textColor="white">
               Buat Chat
             </Button>
           </ModalFooter>

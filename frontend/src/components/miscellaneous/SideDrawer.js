@@ -128,10 +128,10 @@ function SideDrawer() {
         d="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="white"
+        bg="#2C80CD"
         w="100%"
-        p="5px 10px 5px 10px"
-        borderWidth="5px"
+        p="10px 15px 10px 5px"
+        borderBottomWidth="10px"
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           {user.isAdmin === true ? (
@@ -145,7 +145,11 @@ function SideDrawer() {
             <div></div>
           )}
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Work sans">
+        <Text
+          fontSize="2xl"
+          fontFamily="Work sans"
+          style={{ fontWeight: "bold", color: "#4A4040" }}
+        >
           myChat
         </Text>
         <div>
@@ -175,7 +179,11 @@ function SideDrawer() {
             </MenuList>
           </Menu>
           <Menu>
-            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+            <MenuButton
+              as={Button}
+              bg="#2C80CD"
+              rightIcon={<ChevronDownIcon />}
+            >
               <Avatar
                 size="sm"
                 cursor="pointer"
