@@ -60,7 +60,6 @@ const Signup = () => {
         },
         config
       );
-      console.log(data);
       toast({
         title: "Registrasi Sukses",
         status: "success",
@@ -68,7 +67,6 @@ const Signup = () => {
         isClosable: true,
         position: "bottom",
       });
-      // localStorage.setItem("userInfo", JSON.stringify(data));
       setPicLoading(false);
     } catch (error) {
       toast({

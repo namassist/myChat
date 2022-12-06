@@ -1,23 +1,22 @@
 import { ViewIcon, ExternalLinkIcon, DeleteIcon } from "@chakra-ui/icons";
-import { useState, useEffect } from "react";
+import axios from "axios";
 
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
   useDisclosure,
   IconButton,
   Text,
   Image,
   Box,
+  Alert,
 } from "@chakra-ui/react";
 
-const ProfileModal = ({ messages, user, children }) => {
+const ProfileModal = ({ selectedChat, messages, user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const exportChat = async () => {
@@ -55,6 +54,14 @@ const ProfileModal = ({ messages, user, children }) => {
     link.click();
   };
 
+  const changeStatus = async () => {
+    let id = selectedChat.users[1]._id;
+    axios.put(`/api/user/${id}`, { status: "end" }).then((res) => {
+      // Alert
+      window.location.reload();
+    });
+  };
+
   return (
     <>
       {children ? (
@@ -62,11 +69,22 @@ const ProfileModal = ({ messages, user, children }) => {
       ) : (
         <Box d={{ base: "flex", justifyContent: "center" }}>
           <IconButton marginRight="2" icon={<ViewIcon />} onClick={onOpen} />
-          <IconButton
-            marginRight="2"
-            icon={<ExternalLinkIcon />}
-            onClick={exportChat}
-          />
+          {user.isAdmin !== true ? (
+            <>
+              <IconButton
+                marginRight="2"
+                icon={<ExternalLinkIcon />}
+                onClick={exportChat}
+              />
+              <IconButton
+                marginRight="2"
+                icon={<DeleteIcon />}
+                onClick={changeStatus}
+              />
+            </>
+          ) : (
+            ""
+          )}
         </Box>
       )}
       <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
@@ -78,14 +96,14 @@ const ProfileModal = ({ messages, user, children }) => {
             d="flex"
             justifyContent="center"
           >
-            {user.name}
+            {user.isAdmin ? user.name : user.vendor}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
             d="flex"
             flexDir="column"
             alignItems="center"
-            justifyContent="space-between"
+            justifyContent={user.isAdmin ? "space-around" : "space-between"}
           >
             <Image
               borderRadius="full"
@@ -99,40 +117,43 @@ const ProfileModal = ({ messages, user, children }) => {
             >
               Email: {user.email}
             </Text>
-            <Text
-              fontSize={{ base: "20px", md: "18px" }}
-              fontFamily="Work sans"
-            >
-              No Jaringan: {user.noJaringan}
-            </Text>
-            <Text
-              fontSize={{ base: "20px", md: "18px" }}
-              fontFamily="Work sans"
-            >
-              Status: {user.status}
-            </Text>
-            <Text
-              fontSize={{ base: "20px", md: "18px" }}
-              fontFamily="Work sans"
-            >
-              Order: {user.order}
-            </Text>
-            <Text
-              fontSize={{ base: "20px", md: "18px" }}
-              fontFamily="Work sans"
-            >
-              Vendor: {user.vendor}
-            </Text>
-            <Text
-              fontSize={{ base: "20px", md: "18px" }}
-              fontFamily="Work sans"
-            >
-              Nama Vendor: {user.namaVendor}
-            </Text>
+            {user.isAdmin ? (
+              " "
+            ) : (
+              <>
+                <Text
+                  fontSize={{ base: "20px", md: "18px" }}
+                  fontFamily="Work sans"
+                >
+                  Pelanggan: {user.name}
+                </Text>
+                <Text
+                  fontSize={{ base: "20px", md: "18px" }}
+                  fontFamily="Work sans"
+                >
+                  No Jaringan: {user.noJaringan}
+                </Text>
+                <Text
+                  fontSize={{ base: "20px", md: "18px" }}
+                  fontFamily="Work sans"
+                >
+                  Status: {user.status}
+                </Text>
+                <Text
+                  fontSize={{ base: "20px", md: "18px" }}
+                  fontFamily="Work sans"
+                >
+                  Order: {user.order}
+                </Text>
+                <Text
+                  fontSize={{ base: "20px", md: "18px" }}
+                  fontFamily="Work sans"
+                >
+                  Nama Vendor: {user.namaVendor}
+                </Text>
+              </>
+            )}
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

@@ -38,6 +38,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, setSelectedChat, user, notification, setNotification } =
     ChatState();
 
+  console.log(selectedChat);
+
   const fetchMessages = async () => {
     if (!selectedChat) return;
 
@@ -182,6 +184,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <>
                   {getSender(user, selectedChat.users)}
                   <ProfileModal
+                    selectedChat={selectedChat}
                     messages={messages}
                     user={getSenderFull(user, selectedChat.users)}
                   />
@@ -246,6 +249,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 placeholder="Masukkan Pesan.."
                 value={newMessage}
                 onChange={typingHandler}
+                disabled={
+                  selectedChat.users[1].status === "end" &&
+                  selectedChat.users[1].isAdmin === false
+                    ? true
+                    : false
+                }
               />
             </FormControl>
           </Box>

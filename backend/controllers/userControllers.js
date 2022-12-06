@@ -85,6 +85,11 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       pic: user.pic,
+      noJaringan: user.noJaringan,
+      status: user.status,
+      order: user.order,
+      vendor: user.vendor,
+      namaVendor: user.namaVendor,
       token: generateToken(user._id),
     });
   } else {
@@ -93,4 +98,16 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { allUsers, registerUser, authUser };
+const changeStatus = asyncHandler(async (req, res) => {
+  try {
+    const updateStatus = await User.updateOne(
+      { _id: req.params._id },
+      { status: req.body.status }
+    );
+    res.status(200).json(updateStatus);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+module.exports = { allUsers, registerUser, authUser, changeStatus };

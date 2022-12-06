@@ -12,6 +12,8 @@ import {
   Input,
   Select,
   useToast,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -71,7 +73,7 @@ const GroupChatModal = ({ children }) => {
           name,
           email: `${name}@gmail.com`,
           password: genPassword,
-          pic: "https://res.cloudinary.com/dvf43atmj/image/upload/v1669627214/hbawjzip4yl4tzgpdu6q.png",
+          pic: "https://res.cloudinary.com/dvf43atmj/image/upload/v1670308881/userr_wplu4v.png",
           noJaringan,
           status,
           order,
@@ -80,13 +82,20 @@ const GroupChatModal = ({ children }) => {
         },
         config
       );
+
       toast({
         title: "Sukses",
         status: "success",
-        description: `username: ${name}, password: ${genPassword}`,
-        duration: 10000,
-        isClosable: true,
+        description: `email: ${name}@gmail.com, password: ${genPassword}`,
+        duration: 1000,
+        isClosable: false,
         position: "bottom",
+        onCloseComplete: () => {
+          navigator.clipboard.writeText(
+            `email: ${name}@gmail.com \n password: ${genPassword}`
+          );
+          alert("email dan pasword login berhasil di copy!");
+        },
       });
     } catch (error) {
       toast({
@@ -98,16 +107,13 @@ const GroupChatModal = ({ children }) => {
         position: "bottom",
       });
     } finally {
-      setTimeout(() => {
-        window.location.reload();
-      }, 9000);
+      setTimeout(() => {}, 1100);
     }
   };
 
   return (
     <>
       <span onClick={onOpen}>{children}</span>
-
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent bg="#7AA7DC">

@@ -64,6 +64,8 @@ const Login = () => {
         position: "bottom",
       });
       setLoading(false);
+    } finally {
+      window.location.reload();
     }
   };
 

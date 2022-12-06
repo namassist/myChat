@@ -94,8 +94,6 @@ function SideDrawer() {
   };
 
   const accessChat = async (userId) => {
-    console.log(userId);
-
     try {
       setLoadingChat(true);
       const config = {
@@ -133,16 +131,16 @@ function SideDrawer() {
         p="10px 15px 10px 5px"
         borderBottomWidth="10px"
       >
-        <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
+        <Tooltip label="Cari user untuk chat" hasArrow placement="bottom-end">
           {user.isAdmin === true ? (
             <Button variant="ghost" onClick={onOpen}>
               <i className="fas fa-search"></i>
               <Text d={{ base: "none", md: "flex" }} px={4}>
-                Search User
+                Cari User
               </Text>
             </Button>
           ) : (
-            <div></div>
+            ""
           )}
         </Tooltip>
         <Text
@@ -172,8 +170,8 @@ function SideDrawer() {
                   }}
                 >
                   {notif.chat.isGroupChat
-                    ? `New Message in ${notif.chat.chatName}`
-                    : `New Message from ${getSender(user, notif.chat.users)}`}
+                    ? `Pesan baru di ${notif.chat.chatName}`
+                    : `Pesan baru dari ${getSender(user, notif.chat.users)}`}
                 </MenuItem>
               ))}
             </MenuList>
@@ -205,16 +203,16 @@ function SideDrawer() {
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">Cari Users</DrawerHeader>
           <DrawerBody>
             <Box d="flex" pb={2}>
               <Input
-                placeholder="Search by name or email"
+                placeholder="Cari berdasarkan nama atau email"
                 mr={2}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button onClick={handleSearch}>Go</Button>
+              <Button onClick={handleSearch}>Cari</Button>
             </Box>
             {loading ? (
               <ChatLoading />
