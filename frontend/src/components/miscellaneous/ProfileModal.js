@@ -13,7 +13,6 @@ import {
   Text,
   Image,
   Box,
-  Alert,
 } from "@chakra-ui/react";
 
 const ProfileModal = ({ selectedChat, messages, user, children }) => {
@@ -42,6 +41,7 @@ const ProfileModal = ({ selectedChat, messages, user, children }) => {
       res.push(obj);
     }
 
+    // eslint-disable-next-line array-callback-return
     res.map((e) => {
       str += `[${e.date}] ${e.sender} : ${e.content} \n`;
     });
@@ -57,7 +57,7 @@ const ProfileModal = ({ selectedChat, messages, user, children }) => {
   const changeStatus = async () => {
     let id = selectedChat.users[1]._id;
     axios.put(`/api/user/${id}`, { status: "end" }).then((res) => {
-      // Alert
+      alert("berhasil dihapus");
       window.location.reload();
     });
   };
