@@ -58,6 +58,7 @@ const GroupChatModal = ({ children }) => {
 
     let genPassword = generatePassword(6);
 
+
     try {
       const config = {
         headers: {
@@ -75,7 +76,7 @@ const GroupChatModal = ({ children }) => {
           pic: "https://res.cloudinary.com/dvf43atmj/image/upload/v1670308881/userr_wplu4v.png",
           noJaringan,
           status,
-          order,
+          order: customOrder !== undefined ? customOrder  : order,
           vendor,
           namaVendor,
         },
