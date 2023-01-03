@@ -25,6 +25,7 @@ const GroupChatModal = ({ children }) => {
   const [order, setOrder] = useState();
   const [customOrder, setCustomOrder] = useState();
   const [vendor, setVendor] = useState();
+  const [customVendor, setCustomVendor] = useState();
   const [namaVendor, setNamaVendor] = useState();
 
   const toast = useToast();
@@ -77,7 +78,7 @@ const GroupChatModal = ({ children }) => {
           noJaringan,
           status,
           order: customOrder !== undefined ? customOrder  : order,
-          vendor,
+          vendor: customVendor !== undefined ? customVendor  : vendor,
           namaVendor,
         },
         config
@@ -178,13 +179,13 @@ const GroupChatModal = ({ children }) => {
             </FormControl>
             {order === "Lainnya" ? <FormControl>
               <Input
+                placeholder="Order Lainnya"
                 onChange={(e) => setCustomOrder(e.target.value)}
                 mb={3}
                 _placeholder={{ color: "#7B7676" }}
                 bg="#D9D9D9"
               />
-            </FormControl> : <></> }
-            
+            </FormControl> : <></> }            
             <FormControl>
               <Select
                 bg="#D9D9D9"
@@ -203,8 +204,18 @@ const GroupChatModal = ({ children }) => {
                 <option value="Pratama Mandiri">Pratama Mandiri</option>
                 <option value="Amanah">Amanah</option>
                 <option value="Wesi Aji">Wesi Aji</option>
+                <option value="Lainnya">Lainnya</option>
               </Select>
             </FormControl>
+            {vendor === "Lainnya" ? <FormControl>
+              <Input
+                onChange={(e) => setCustomVendor(e.target.value)}
+                mb={3}
+                placeholder="Vendor Lainnya"
+                _placeholder={{ color: "#7B7676" }}
+                bg="#D9D9D9"
+              />
+            </FormControl> : <></> }  
             <FormControl>
               <Input
                 placeholder="Nama Vendor"
