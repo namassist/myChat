@@ -12,8 +12,6 @@ import {
   Input,
   Select,
   useToast,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -25,6 +23,7 @@ const GroupChatModal = ({ children }) => {
   const [noJaringan, setNoJaringan] = useState();
   const [status, setStatus] = useState();
   const [order, setOrder] = useState();
+  const [customOrder, setCustomOrder] = useState();
   const [vendor, setVendor] = useState();
   const [namaVendor, setNamaVendor] = useState();
 
@@ -45,7 +44,7 @@ const GroupChatModal = ({ children }) => {
     return password;
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => {    
     if (!name || !noJaringan || !status || !order || !vendor || !namaVendor) {
       toast({
         title: "Kolom input harus diisi!",
@@ -160,14 +159,31 @@ const GroupChatModal = ({ children }) => {
               </Select>
             </FormControl>
             <FormControl>
-              <Input
+              <Select
+                bg="#D9D9D9"
+                mb={3}
+                value={order}
                 placeholder="Order"
+                textColor={order !== undefined ? "" : "#7B7676"}
+                iconColor="gray.400"
                 onChange={(e) => setOrder(e.target.value)}
+              >
+                <option value="Cabut Perangkat">Cabut Perangkat</option>
+                <option value="Migrasi Perangkat">Migrasi Perangkat</option>
+                <option value="Pasang Baru">Pasang Baru</option>
+                <option value="Aktivasi">Aktivasi</option>
+                <option value="Lainnya">Lainnya</option>
+              </Select>
+            </FormControl>
+            {order === "Lainnya" ? <FormControl>
+              <Input
+                onChange={(e) => setCustomOrder(e.target.value)}
                 mb={3}
                 _placeholder={{ color: "#7B7676" }}
                 bg="#D9D9D9"
               />
-            </FormControl>
+            </FormControl> : <></> }
+            
             <FormControl>
               <Select
                 bg="#D9D9D9"
